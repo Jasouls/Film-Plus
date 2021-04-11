@@ -41,12 +41,15 @@ export default {
         })
     },
     methods: {
+        //将请求到的城市数据进行二次处理
         selectCity(cities){
             let azArr = []
+            //将65-90的数字遍历，转换成字母后放入azArr
             for(let i = 65;i < 91;i++){
                 azArr.push(String.fromCharCode(i))
             }
             let newArr = []
+            //过滤城市数据，将拼音首字母与azArr的每一项进行匹配，放入新数组返回
             for(let j = 0;j < azArr.length;j++){
                 let arr = cities.filter(item => item.pinyin.substring(0,1)===azArr[j].toLowerCase())
                 if(arr.length > 0){
@@ -59,6 +62,7 @@ export default {
             return newArr
         },
         backone(){
+            //返回上一页
             history.back()
         },
         handleClick(id){

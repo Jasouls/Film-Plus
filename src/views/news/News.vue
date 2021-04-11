@@ -30,9 +30,9 @@ export default {
     data () {
         return {
             newlist:[],
-            initpage:0,
-            isShow:false,
-            loading:false    
+            initpage:0,     //数据初始页面
+            isShow:false,   //控制底部加载容器的显示与隐藏
+            loading:false   //是否禁用底部触发事件
         }
     },
     mounted () {
@@ -49,7 +49,9 @@ export default {
     methods: {
         loadMore(){
             this.loading = true
+            //初始化页面时隐藏下拉加载容器
             this.isShow = this.newlist.length < 1?false:true
+            //防抖
             setTimeout(() => {
                 this.loading = false
             },1000)

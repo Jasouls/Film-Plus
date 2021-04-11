@@ -5,6 +5,7 @@ import Router from 'vue-router'
 const Home = () => import('@/views/home/Home')
 const Cinema = () => import('@/views/cinema/Cinema')
 const Cinemapage = () => import('@/views/cinema/Cinemapage')
+const Search = () => import('@/views/cinema/Search')
 const News = () => import('@/views/news/News')
 const User = () => import('@/views/user/User')
 const Login = () => import('@/views/user/Login')
@@ -55,6 +56,13 @@ const routes = [
     component:Cinemapage,
     meta: {
       title:"影院详情"
+    }
+  },
+  {
+    path:'/search',
+    component:Search,
+    meta: {
+      title:"搜索"
     }
   },
   {
@@ -113,6 +121,7 @@ const router = new Router({
   mode:'history',
   linkActiveClass:'active'
 })
+//前置路由守卫，将页面标题修改为对应内容
 router.beforeEach((to, from, next) => {
   document.title = to.matched[0].meta.title
   next()

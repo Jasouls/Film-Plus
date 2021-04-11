@@ -53,6 +53,7 @@ import { MessageBox } from 'mint-ui'
 import Topbar from '@/components/common/topbar/Topbar'
 import Bottombar from '@/components/base/bottombar/Bottombar'
 import Vue from 'vue'
+//过滤日期，将时间戳转换为年月日格式
 Vue.filter('datefilter',data => {
     let year = new Date(parseInt(data) * 1000).getFullYear()
     let month = new Date(parseInt(data) * 1000).getMonth() + 1
@@ -72,6 +73,7 @@ export default {
         Bottombar
     },
     mounted () {
+        //监听页面滚动
         window.onscroll = this.scrollTop
         this.filmId = this.$route.params.filmId;
         request3({
@@ -81,6 +83,7 @@ export default {
         })
     },
     methods: {
+        //通过滚动高度设置topbar组件的显示与隐藏
         scrollTop(){
             if(document.documentElement.scrollTop >= 44){
                 this.isShow = true
@@ -92,6 +95,7 @@ export default {
             history.back()
         },
         isLogin(){
+            //提示信息
             MessageBox({
                 title: '提示',
                 message: '请登录后购买',
@@ -106,6 +110,7 @@ export default {
         this.$store.commit("changeTab",true) 
     },
     beforeDestroy () {
+        //页面销毁之前取消滚动监听
         window.onscroll = null
     }
 }

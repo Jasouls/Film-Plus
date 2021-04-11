@@ -53,12 +53,15 @@ export default {
         this.$store.commit('changeTab',true)
     },
     methods: {
+        //返回上一页
         backpage(){
             history.back()
         },
+        //跳转到登录页面
         toLogin(){
             this.$router.push('/login')
         },
+        // 判断用户名是否合法
         see(){
             if(this.$refs.value.value.length < 3 && this.$refs.value.value.length > 0 || this.$refs.value.value.length > 8){
                 this.message = "!用户名应为3-8位"
@@ -71,6 +74,7 @@ export default {
                 this.$refs.color.className = 'su'
             }
         },
+        //判断密码是否合法
         saw(){
             if(this.$refs.number.value.length < 6 && this.$refs.number.value.length > 0 || this.$refs.number.value.length > 12){
                 this.pass = "!密码应为6-12位"
@@ -83,6 +87,7 @@ export default {
                 this.$refs.passcolor.className = 'su'
             }
         },
+        //判断密码是否与设置时一致
         issaw(){
             if(this.$refs.isnumber.value.length === 0){
                 this.ispass = "!密码不能为空"
@@ -95,6 +100,7 @@ export default {
                 this.$refs.ispasscolor.className = 'da'
             }
         },
+        //判断注册信息是否全部合法，全部正确后允许提交
         tojump(){
             if(this.$refs.color.className === "su" && this.$refs.passcolor.className === "su" && this.$refs.ispasscolor.className === "su"){
                 this.$router.push("/regsu")

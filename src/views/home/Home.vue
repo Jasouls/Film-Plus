@@ -30,6 +30,7 @@ export default {
         window.onscroll = null
     },
     methods: {
+        //通过滚动高度的监听完成吸顶效果与topbar的显示与隐藏
         scrollHigh(){
             if(document.documentElement.scrollTop >= this.$refs.gethigh.$el.offsetHeight){
                 this.isFixed = true

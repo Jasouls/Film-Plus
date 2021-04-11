@@ -62,6 +62,7 @@ export function request41(config){
     })
     return intance(config)
 }
+
 export function request42(config){
     const intance = axios.create({
         baseURL:'https://m.maizuo.com',

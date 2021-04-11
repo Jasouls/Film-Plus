@@ -3,7 +3,7 @@
         <Topbar>
             <div slot="left" ref="getcity" @click="toChangeCity"></div>
             <div slot="center">影院</div>
-            <div slot="right">
+            <div slot="right" @click="toSearch">
                 <i class="iconfont icon-search"></i>
             </div>
         </Topbar>
@@ -37,16 +37,21 @@ export default {
         }
     },
     mounted () {
+        //预加载
         Indicator.open({
             text: '加载中...',
             spinnerType: 'fading-circle'
         })
+        //设置主题部分高度
         this.$refs.getscroll.style.height = document.documentElement.clientHeight - 44 - 49 + 'px'
+        //请求影院数据
         request4({
             url:`/gateway?cityId=${this.$store.state.cityId}&ticketFlag=1&k=1588012`
         }).then(res => {
             this.cinemalist = res.data.data.cinemas
+            this.$store.commit("saveCinema",this.cinemalist)
             this.$nextTick(() => {
+                //应用better-scroll
                 betters(".bscroll")
                 Indicator.close()
                 this.$refs.getcity.innerHTML = this.cinemalist[0].cityName
@@ -57,12 +62,17 @@ export default {
         Topbar
     },
     methods: {
+        //跳转city页面
         toChangeCity(){
             this.$router.push('/city')
         },
+        //跳转到影院详情页面
         cinemaView(cinemaId){
             this.$store.commit('setCinemaId',cinemaId)
             this.$router.push('/cinemapage')
+        },
+        toSearch(){
+            this.$router.push("/search")
         }
     },
     beforeDestroy () {
@@ -73,8 +83,10 @@ export default {
 <style lang="less" scoped>
 .bscroll{
     position: relative;
+    margin-top: 44px;
+    overflow: hidden;
     .cinemas{
-        margin-top: 44px;
+        // margin-top: 44px;
         li{
             height: 80px;
             border-bottom: 1px solid lightgray;

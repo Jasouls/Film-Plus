@@ -63,13 +63,16 @@ export default {
         Topbar
     },
     mounted () {
+        //隐藏tabbar
         this.$store.commit("changeTab",false)
+        //请求影院信息
         request41({
             url:`/gateway/?cinemaId=${this.$store.state.cinemaId}&k=5338318`
         }).then(res => {
             this.cinemaobj = res.data.data.cinema
             this.services = res.data.data.cinema.services
         })
+        //请求相关电影信息
         request42({
             url:`/gateway/?cinemaId=${this.$store.state.cinemaId}&k=2365896`
         }).then(res => {
@@ -138,7 +141,7 @@ export default {
                 }
             }
             .filmtype{
-                margin-top: 20px;
+                margin-top: 10px;
                 padding: 10px;
                 .typelist{
                     line-height: 24px;

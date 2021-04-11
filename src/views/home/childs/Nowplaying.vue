@@ -30,10 +30,12 @@ export default {
         }
     },
     mounted () {
+        //预加载显示
         Indicator.open({
             text: '加载中...',
             spinnerType: 'fading-circle'
         })
+        //判断vuex中是否有缓存数据，没有则请求，有则使用缓存
         if(this.$store.state.nowlist.length === 0){
             this.loadMore()
         }else{
@@ -52,12 +54,15 @@ export default {
             request1({
                 url:`/gateway?cityId=${this.$store.state.cityId}&pageNum=${this.$store.state.nowcurrent}&pageSize=10&type=1&k=9026056`
             }).then(res => {
+                //将电影的总数记录到total中
                 this.total = res.data.data.total
+                //通过vuex缓存请求到的数据
                 this.$store.commit("pushnow",res.data.data.films)
                 this.$store.commit("nowadd")
                 this.$nextTick(() => {
                     Indicator.close()
                 })
+                //判断加载电影信息是否到达上限，到上限则取消上拉加载容器
                 if(this.total === this.$store.state.nowlist.length){
                     this.iShow = false
                     return;

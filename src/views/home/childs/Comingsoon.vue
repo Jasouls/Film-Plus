@@ -17,10 +17,12 @@
 import {request2} from '@/network/request'
 import { Indicator } from 'mint-ui'
 import Vue from 'vue'
+//过滤演员信息，转化为字符串返回
 Vue.filter('actorfilter',data => {
     const newArr = data.map(item => item.name)
     return newArr.join(" ")
 })
+//过滤日期，将时间戳转换为特定格式
 Vue.filter('datefilter',data => {
     let week = new Date(parseInt(data) * 1000).getDay()
     let arr = ['日','一','二','三','四','五','六']
@@ -42,6 +44,7 @@ export default {
             text: '加载中...',
             spinnerType: 'fading-circle'
         })
+        //判断vuex中是否有缓存数据，没有则请求，有则使用缓存
          if(this.$store.state.comelist.length === 0){
             this.loadMore()
         }else{
@@ -64,6 +67,7 @@ export default {
                 url:`/gateway?cityId=${this.$store.state.cityId}&pageNum=${this.$store.state.comecurrent}&pageSize=10&type=2&k=886439`
             }).then(res => {
                 this.total = res.data.data.total
+                //通过vuex缓存请求到的数据
                 this.$store.commit("pushcome",res.data.data.films)
                 this.$store.commit("comeadd")
                 this.$nextTick(() => {
