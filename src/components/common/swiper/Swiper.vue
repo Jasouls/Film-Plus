@@ -145,15 +145,15 @@ export default {
     }
     &>a{
         text-decoration: none;
-        width: 8vw;
-        height: 8vw;
+        width: 30px;
+        height: 30px;
         border-radius: 50%;
         background-color:rgba(255,255,255,0.6);
         color: black;
         text-align: center;
-        font-size: 6vw;
+        font-size: 20px;
         font-weight: bold;
-        line-height: 7vw;
+        line-height: 26px;
         position: absolute;
         top: 50%;
         transform: translateY(-50%);

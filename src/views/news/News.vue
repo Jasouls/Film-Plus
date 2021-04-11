@@ -40,7 +40,8 @@ export default {
             text: '加载中...',
             spinnerType: 'fading-circle'
         })
-        this.$refs.getscroll.style.height = document.documentElement.clientHeight - 44 - 49 + 'px'
+        var clientHeight = document.documentElement.clientHeight || document.body.clientHeight
+        this.$refs.getscroll.style.height = clientHeight - 44 - 49 + 'px'
         this.loadMore()
     },
     components: {

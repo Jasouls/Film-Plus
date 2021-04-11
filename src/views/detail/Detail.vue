@@ -85,7 +85,8 @@ export default {
     methods: {
         //通过滚动高度设置topbar组件的显示与隐藏
         scrollTop(){
-            if(document.documentElement.scrollTop >= 44){
+            var scrollTop = document.documentElement.scrollTop || document.body.scrollTop
+            if(scrollTop >= 44){
                 this.isShow = true
             }else{
                 this.isShow = false
