@@ -1,11 +1,17 @@
 <template>
     <div class="cinema">
         <Topbar>
-            <div slot="left" ref="getcity" @click="toChangeCity"></div>
-            <div slot="center">影院</div>
-            <div slot="right" @click="toSearch">
-                <i class="iconfont icon-search"></i>
-            </div>
+            <template v-slot:left>
+                <div ref="getcity" @click="toChangeCity"></div>
+            </template>
+            <template v-slot:center>
+                <div>影院</div>
+            </template>
+            <template v-slot:right>
+                <div @click="toSearch">
+                    <i class="iconfont icon-search"></i>
+                </div>
+            </template>
         </Topbar>
         <div class="bscroll" ref="getscroll">
             <ul class="cinemas">
@@ -18,11 +24,9 @@
                         <p class="price">￥{{data.lowPrice/100}}起</p>
                         <p>距离未知</p>
                     </div>
-                    
                 </li>
             </ul>
-        </div>
-        
+        </div> 
     </div>
 </template>
 <script>
@@ -86,7 +90,6 @@ export default {
     margin-top: 44px;
     overflow: hidden;
     .cinemas{
-        // margin-top: 44px;
         li{
             height: 80px;
             border-bottom: 1px solid lightgray;

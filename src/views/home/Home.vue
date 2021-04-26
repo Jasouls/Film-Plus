@@ -1,7 +1,9 @@
 <template>
     <div>
         <Topbar v-show="isFixed">
-            <div slot="center">电影</div>
+            <template v-slot:center>
+                <div>电影</div>
+            </template>
         </Topbar>
         <Swiper ref="gethigh"></Swiper>
         <Headerbar :class="isFixed?'fixed':''"></Headerbar>

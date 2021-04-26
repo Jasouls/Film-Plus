@@ -1,9 +1,15 @@
 <template>
     <div>
         <Topbar>
-            <div slot="left" class="back" @click="backpage">&lt;</div>
-            <div slot="center">注册新账号</div>
-            <div slot="right" @click="toLogin">登录</div>
+            <template v-slot:left>
+                <div class="back" @click="backpage">&lt;</div>
+            </template>
+            <template v-slot:center>
+                <div>注册新账号</div>
+            </template>
+            <template v-slot:right>
+                <div @click="toLogin">登录</div>
+            </template> 
         </Topbar>
         <div class="box">
             <div class="logo">

@@ -1,11 +1,20 @@
 <template>
     <div class="new">
         <Topbar>
-            <div slot="left" @click="download">App</div>
-            <div slot="center">影视快讯</div>
-            <div slot="right">
-                <i class="iconfont icon-search"></i>
-            </div>
+            <template v-slot:left>
+                <div @click="download">App</div>
+            </template>
+            <template v-slot:center>
+                <div>影视快讯</div>
+            </template>
+            <template v-slot:right>
+                <div>
+                    <i class="iconfont icon-search"></i>
+                </div>
+            </template>
+            
+            
+            
         </Topbar>
         <div class="bscroll" ref="getscroll">
             <ul class="news" v-infinite-scroll="loadMore" infinite-scroll-immediate-check="false" infinite-scroll-disabled="loading" infinite-scroll-distance="0">

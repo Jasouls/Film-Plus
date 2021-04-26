@@ -12,7 +12,8 @@ export default new Vuex.Store({
     comecurrent:1,       //即将上映所处页面
     cityId:110100,       //当前城市id
     cinemaId:0,          //当前影院id
-    cinemadata:[]
+    cinemadata:[]        //影院数据
+
   },
   mutations: {
     //改变tabbar状态

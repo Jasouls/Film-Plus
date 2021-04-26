@@ -1,8 +1,12 @@
 <template>
     <div class="page">
         <Topbar>
-            <div slot="left" class="back" @click="backone">&lt;</div>
-            <div slot="center">影院信息</div>
+            <template v-slot:left>
+                <div class="back" @click="backone">&lt;</div>
+            </template>
+            <template v-slot:center>
+                <div>影院信息</div>
+            </template>
         </Topbar>
         <div class="main" v-if="cinemaobj">
             <div class="shop">

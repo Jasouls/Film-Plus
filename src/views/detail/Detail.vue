@@ -1,7 +1,9 @@
 <template>
     <div class="detail" v-if="datalist">
         <Topbar v-show="isShow">
-            <div slot="center">{{datalist.name}}</div>
+            <template v-slot:center>
+                <div>{{datalist.name}}</div>
+            </template>
         </Topbar>
         <img :src="datalist.poster" alt="">
         <div class="main">

@@ -1,8 +1,14 @@
 <template>
     <div class="regsu">
         <Topbar>
-            <div slot="left" @click="toLogin">登录</div>
-            <div slot="center">注册成功</div>
+            <template v-slot:left>
+                <div @click="toLogin">登录</div>
+            </template>
+            <template v-slot:center>
+                <div>注册成功</div>
+            </template>
+            
+            
         </Topbar>
         <h2>
             <p class="ti">恭喜您：</p>

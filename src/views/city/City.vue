@@ -1,13 +1,19 @@
 <template>
     <div class="city">
         <Topbar>
-            <div slot="left" class="back" @click="backone">
-                &lt;
-            </div>
-            <div slot="center">请选择城市</div>
-            <div slot="right">
-                <i class="iconfont icon-search"></i>
-            </div>
+            <template v-slot:left>
+                <div class="back" @click="backone">
+                    &lt;
+                </div>
+            </template>
+            <template v-slot:center>
+                <div>请选择城市</div>
+            </template>
+            <template v-slot:right>
+                <div>
+                    <i class="iconfont icon-search"></i>
+                </div>
+            </template>
         </Topbar>
         <div class="list" ref="setheight">
             <mt-index-list>
