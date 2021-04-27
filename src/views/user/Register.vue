@@ -109,6 +109,12 @@ export default {
         //判断注册信息是否全部合法，全部正确后允许提交
         tojump(){
             if(this.$refs.color.className === "su" && this.$refs.passcolor.className === "su" && this.$refs.ispasscolor.className === "su"){
+                const userMes = {
+                    name:this.$refs.value.value,
+                    word:this.$refs.number.value
+                }
+                // console.log(userMes)
+                this.$store.commit("saveUser",userMes)
                 this.$router.push("/regsu")
             }else{
                 MessageBox('提示', '用户名或密码不合法，请仔细核对！')

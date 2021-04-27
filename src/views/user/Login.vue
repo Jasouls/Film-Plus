@@ -18,11 +18,11 @@
             <form action="javascript:;">
                 <div class="username">
                     <label for="username">用户名:</label>
-                    <input type="text" id='username' autocomplete="off" placeholder="请输入用户名" v-model="username">
+                    <input type="text" id='username' autocomplete="off" placeholder="请输入用户名" v-model="name">
                 </div>
                 <div class="password">
                     <label for="password">密码:</label>
-                    <input type="password" id='password' autocomplete="off" placeholder="请输入密码">
+                    <input type="password" id='password' autocomplete="off" placeholder="请输入密码" v-model="word">
                 </div>
                 <input type="submit" value="登录" class="btn" @click="toUser">
             </form>
@@ -32,11 +32,13 @@
 </template>
 <script>
 import Topbar from '@/components/common/topbar/Topbar'
+import { MessageBox } from 'mint-ui'
 export default {
     name:'Login',
     data () {
         return {
-            username:""    
+            name:"",
+            word:""    
         }
     },
     components: {
@@ -56,8 +58,31 @@ export default {
             this.$router.push('/register')
         },
         toUser(){
-            this.$store.commit("logname",this.username)
-            this.$router.push("/user")
+            const arr = []
+            const pass = []
+            this.$store.state.userList.forEach(itemObj => {
+                arr.push(itemObj.name)
+                pass.push(itemObj.word)
+            })
+            if(arr.includes(this.name)){
+                const num = arr.findIndex(item => item == this.name)
+                if(pass[num] === this.word){
+                    this.$store.commit("logname",this.name)
+                    this.$router.push("/user")
+                }else{
+                    MessageBox({
+                        title: '提示',
+                        message: '密码错误，请重新输入',
+                        showCancelButton: false
+                    })
+                }
+            }else{
+                MessageBox({
+                    title: '提示',
+                    message: '用户名不存在，请重新输入',
+                    showCancelButton: false
+                })
+            }
         }
     }
 }

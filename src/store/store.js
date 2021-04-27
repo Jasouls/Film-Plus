@@ -13,7 +13,8 @@ export default new Vuex.Store({
     cityId:110100,       //当前城市id
     cinemaId:0,          //当前影院id
     cinemadata:[],       //影院数据
-    logname:''
+    logname:'',
+    userList:[]
   },
   mutations: {
     //改变tabbar状态
@@ -44,6 +45,9 @@ export default new Vuex.Store({
     },
     saveCinema(state,data){
       state.cinemadata = data
+    },
+    saveUser(state,data){
+      state.userList.push(data)
     },
     logname(state,data){
       state.logname = data
