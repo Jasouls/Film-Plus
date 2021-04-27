@@ -18,13 +18,13 @@
             <form action="javascript:;">
                 <div class="username">
                     <label for="username">用户名:</label>
-                    <input type="text" id='username' autocomplete="off" placeholder="请输入用户名">
+                    <input type="text" id='username' autocomplete="off" placeholder="请输入用户名" v-model="username">
                 </div>
                 <div class="password">
                     <label for="password">密码:</label>
                     <input type="password" id='password' autocomplete="off" placeholder="请输入密码">
                 </div>
-                <input type="submit" value="登录" class="btn">
+                <input type="submit" value="登录" class="btn" @click="toUser">
             </form>
         </div>
         
@@ -34,6 +34,11 @@
 import Topbar from '@/components/common/topbar/Topbar'
 export default {
     name:'Login',
+    data () {
+        return {
+            username:""    
+        }
+    },
     components: {
         Topbar
     },
@@ -49,6 +54,10 @@ export default {
         },
         toRegister(){
             this.$router.push('/register')
+        },
+        toUser(){
+            this.$store.commit("logname",this.username)
+            this.$router.push("/user")
         }
     }
 }

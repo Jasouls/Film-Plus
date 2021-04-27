@@ -3,7 +3,8 @@
     <div class="main">
         <div class="nowlogin" @click="toLogin">
             <i class="iconfont icon-bussiness-man-fill"></i>
-            <div>登录</div>
+            <div v-if="isLog">{{$store.state.logname}}</div>
+            <div v-else>登录</div>
         </div>
         <ul class="order">
             <li @click="isLogin">
@@ -16,6 +17,11 @@
             </li>
         </ul>
         <ul class="others">
+            <li @click="isLogin">
+                <i class="iconfont icon-bussiness-man-fill"></i>
+                <span>个人信息</span>
+                <i class="next">&gt;</i>
+            </li>
             <li @click="isLogin">
                 <i class="iconfont icon-inquiry-template"></i>
                 <span>兑换券</span>
@@ -37,22 +43,50 @@
                 <i class="next">&gt;</i>
             </li>
         </ul>
+        <button class="nolog" @click="nolog" v-if="isLog">退出登录</button>
     </div>
 </template>
 <script>
 import { MessageBox } from 'mint-ui'
 export default {
     name:'User',
+    computed: {
+      isLog(){
+          return this.$store.state.logname === ''?false:true
+      }  
+    },
     methods: {
         isLogin(){
-            MessageBox({
-                title: '提示',
-                message: '详情信息请在登录后查看',
-                showCancelButton: true
-            })
+            if(this.$store.state.logname){
+                MessageBox({
+                    title: '提示',
+                    message: '即将前往。。。。。',
+                    showCancelButton: true
+                })
+            }else{
+                MessageBox({
+                    title: '提示',
+                    message: '详情信息请在登录后查看',
+                    showCancelButton: true
+                })
+            } 
         },
         toLogin(){
             this.$router.push('/login')
+        },
+        nolog(){
+            MessageBox({
+                title: '提示',
+                message: '确认退出？',
+                showCancelButton: true
+            }).then(res => {
+                this.isRes(res)
+            })
+        },
+        isRes(data){
+            if(data === 'confirm'){
+                this.$store.commit("nolog")
+            }
         }
     }
 }
@@ -126,6 +160,15 @@ export default {
                 font-weight: bold;
             }
         }
+    }
+    .nolog{
+        width: 100vw;
+        background-color: rgb(255, 44, 44);
+        color: black;
+        line-height: 30px;
+        text-align: center;
+        outline: none;
+        font-size: 18px;
     }
 }
 </style>
