@@ -55,9 +55,9 @@ export default {
                 url:`/gateway?cityId=${this.$store.state.cityId}&pageNum=${this.$store.state.nowcurrent}&pageSize=10&type=1&k=9026056`
             }).then(res => {
                 //将电影的总数记录到total中
-                this.total = res.data.data.total
+                this.total = res.total
                 //通过vuex缓存请求到的数据
-                this.$store.commit("pushnow",res.data.data.films)
+                this.$store.commit("pushnow",res.films)
                 this.$store.commit("nowadd")
                 this.$nextTick(() => {
                     Indicator.close()

@@ -61,14 +61,14 @@ export default {
             this.$router.push(`/detail/${filmId}`)
         },
         loadMore(){
-            this.iShow = this.$store.state.comelist.length < 10?false:true
+            this.iShow = this.$store.state.comelist.length < 10 ? false : true
             this.loading = true
             request2({
                 url:`/gateway?cityId=${this.$store.state.cityId}&pageNum=${this.$store.state.comecurrent}&pageSize=10&type=2&k=886439`
             }).then(res => {
-                this.total = res.data.data.total
+                this.total = res.total
                 //通过vuex缓存请求到的数据
-                this.$store.commit("pushcome",res.data.data.films)
+                this.$store.commit("pushcome",res.films)
                 this.$store.commit("comeadd")
                 this.$nextTick(() => {
                     Indicator.close()

@@ -52,7 +52,7 @@ export default {
         request4({
             url:`/gateway?cityId=${this.$store.state.cityId}&ticketFlag=1&k=1588012`
         }).then(res => {
-            this.cinemalist = res.data.data.cinemas
+            this.cinemalist = res
             this.$store.commit("saveCinema",this.cinemalist)
             this.$nextTick(() => {
                 //应用better-scroll

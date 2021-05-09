@@ -83,7 +83,7 @@ export default {
             const target = this.startx + offset * next
             this.animate(target,next)
         },
-        animate(target,next){
+        animate(target,next){     //动画切换
             window.timer = setInterval(() => {
                 if((next === -1 && this.startx > target) || (next === 1 && this.startx < target)){
                     this.startx += 1 * next * this.speed
@@ -114,7 +114,7 @@ export default {
             this.speed = Math.abs(index - this.current)
             this.move(offset,next)
         },
-        autoplay(){
+        autoplay(){      //自动轮播
             clearInterval(window.play)
             window.play = setInterval(() => {
                 this.move(this.oneoffset,-1)
@@ -173,7 +173,7 @@ export default {
             float: left;
             border: 2px solid white;
             border-radius: 50%;
-            margin: 0 8px;
+            margin: 0 1vw;
             &.active{
                 background-color: orangered;
             }

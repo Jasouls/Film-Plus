@@ -73,14 +73,14 @@ export default {
         request41({
             url:`/gateway/?cinemaId=${this.$store.state.cinemaId}&k=5338318`
         }).then(res => {
-            this.cinemaobj = res.data.data.cinema
-            this.services = res.data.data.cinema.services
+            this.cinemaobj = res
+            this.services = res.services
         })
         //请求相关电影信息
         request42({
             url:`/gateway/?cinemaId=${this.$store.state.cinemaId}&k=2365896`
         }).then(res => {
-            this.photolist = res.data.data.films
+            this.photolist = res
         })
     },
     methods: {

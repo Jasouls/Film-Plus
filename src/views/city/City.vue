@@ -43,7 +43,7 @@ export default {
         request6({
             url:'/gateway?k=8585724'
         }).then(res => {
-            this.citylist = this.selectCity(res.data.data.cities)
+            this.citylist = this.selectCity(res)
         })
     },
     methods: {

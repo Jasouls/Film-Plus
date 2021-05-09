@@ -25,7 +25,7 @@
         <div class="actors">
             <h3>演职人员</h3>
             <ul class="actorlist">
-                <li v-for="data in datalist.actors" :key="data.role">
+                <li v-for="data in datalist.actors" :key="data.name">
                     <img :src="data.avatarAddress" alt="">
                     <p>{{data.name}}</p>
                     <p>{{data.role}}</p>
@@ -81,7 +81,7 @@ export default {
         request3({
             url:`/gateway?filmId=${this.filmId}&k=2631414`
         }).then(res => {
-            this.datalist = res.data.data.film
+            this.datalist = res
         })
     },
     methods: {

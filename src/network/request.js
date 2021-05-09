@@ -10,6 +10,10 @@ export function request1(config){
             'X-Host': 'mall.film-ticket.film.list'
         }
     })
+    intance.interceptors.response.use(
+        config => config.data.data,
+        error => error
+    )
     return intance(config)
 }
 //comingsoon
@@ -21,6 +25,10 @@ export function request2(config){
             'X-Host': 'mall.film-ticket.film.list'
         }
     })
+    intance.interceptors.response.use(
+        config => config.data.data,
+        error => error
+    )
     return intance(config)
 }
 
@@ -34,6 +42,10 @@ export function request3(config){
             'X-Host': 'mall.film-ticket.film.info'
         }
     })
+    intance.interceptors.response.use(
+        config => config.data.data.film,
+        error => error
+    )
     return intance(config)
 }
 
@@ -48,6 +60,10 @@ export function request4(config){
             'X-Host': 'mall.film-ticket.cinema.list'
         }
     })
+    intance.interceptors.response.use(
+        config => config.data.data.cinemas,
+        error => error
+    )
     return intance(config)
 }
 
@@ -60,6 +76,10 @@ export function request41(config){
             'X-Host': 'mall.film-ticket.cinema.info'
         }
     })
+    intance.interceptors.response.use(
+        config => config.data.data.cinema,
+        error => error
+    )
     return intance(config)
 }
 
@@ -71,6 +91,10 @@ export function request42(config){
             'X-Host': 'mall.film-ticket.film.cinema-show-film'
         }
     })
+    intance.interceptors.response.use(
+        config => config.data.data.films,
+        error => error
+    )
     return intance(config)
 }
 
@@ -91,5 +115,9 @@ export function request6(config){
             'X-Host': 'mall.film-ticket.city.list'
         }
     })
+    intance.interceptors.response.use(
+        config => config.data.data.cities,
+        error => error
+    )
     return intance(config)
 }

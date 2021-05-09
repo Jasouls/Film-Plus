@@ -46,12 +46,15 @@ export default new Vuex.Store({
     saveCinema(state,data){
       state.cinemadata = data
     },
+    //存储注册信息
     saveUser(state,data){
       state.userList.push(data)
     },
+    //登录成功后缓存用户名
     logname(state,data){
       state.logname = data
     },
+    //退出登录后删除用户名缓存
     nolog(state){
       state.logname = ''
     }
