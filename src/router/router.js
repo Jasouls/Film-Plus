@@ -13,6 +13,7 @@ const Register = () => import('@/views/user/Register')
 const Regsu = () => import('@/views/user/Regsu')
 const Detail = () => import('@/views/detail/Detail')
 const City = () => import('@/views/city/City')
+const Shopcar = () => import('@/views/shopcar/Shopcar')
 
 //二级路由
 const Nowplaying = () => import('@/views/home/childs/Nowplaying')
@@ -98,6 +99,13 @@ const routes = [
     component:Regsu,
     meta: {
       title:"注册成功"
+    }
+  },
+  {
+    path:'/shopcar',
+    component:Shopcar,
+    meta: {
+      title:"购物车"
     }
   },
   {

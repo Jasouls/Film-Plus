@@ -13,6 +13,7 @@ export default new Vuex.Store({
     cityId:110100,       //当前城市id
     cinemaId:0,          //当前影院id
     cinemadata:[],       //影院数据
+    shopcar:[],          //购物车数据
     logname:'',
     userList:[]
   },
@@ -57,6 +58,10 @@ export default new Vuex.Store({
     //退出登录后删除用户名缓存
     nolog(state){
       state.logname = ''
+    },
+    //添加购物车信息
+    addShop(state,data){
+      state.shopcar.push(JSON.parse(JSON.stringify(data)))
     }
   }
 })

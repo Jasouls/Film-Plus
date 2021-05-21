@@ -7,7 +7,7 @@
             <div v-else>登录</div>
         </div>
         <ul class="order">
-            <li @click="isLogin">
+            <li @click="toShopcar">
                 <i class="iconfont icon-manage-order-fill"></i>
                 <div>电影订单</div>
             </li>
@@ -73,6 +73,17 @@ export default {
         },
         toLogin(){
             this.$router.push('/login')
+        },
+        toShopcar(){
+            if(this.$store.state.logname){
+                this.$router.push("/shopcar")
+            }else{
+                MessageBox({
+                    title: '提示',
+                    message: '详情信息请在登录后查看',
+                    showCancelButton: true
+                })
+            }
         },
         nolog(){
             MessageBox({

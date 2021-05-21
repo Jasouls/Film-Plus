@@ -45,7 +45,7 @@
             </ul>
         </div>
         <Bottombar v-show="!$store.state.isTabbarShow" @click.native="isLogin">
-            <div>选座购票</div>
+            <div>购票</div>
         </Bottombar>
     </div>
 </template>
@@ -98,12 +98,31 @@ export default {
             history.back()
         },
         isLogin(){
-            //提示信息
-            MessageBox({
-                title: '提示',
-                message: '请登录后购买',
-                showCancelButton: true
-            })
+            if(!this.$store.state.logname){
+                //提示信息
+                MessageBox({
+                    title: '提示',
+                    message: '请先登录',
+                    showCancelButton: true
+                })
+            }else{
+                if(!this.$store.state.shopcar.find(res => res.filmId == this.filmId)){
+                    this.$store.commit('addShop',this.datalist)
+                    MessageBox({
+                        title: '提示',
+                        message: '加入购物车成功',
+                        showCancelButton: true
+                    })
+                }else{
+                    MessageBox({
+                        title: '提示',
+                        message: '购物车中已存在',
+                        showCancelButton: true
+                    })
+                }
+                
+            }
+            
         }
     },
     beforeCreate () {
