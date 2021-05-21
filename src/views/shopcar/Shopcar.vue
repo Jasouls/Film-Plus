@@ -8,7 +8,7 @@
                 <div>购物车</div>
             </template>
         </Topbar> 
-        <ul class="list">
+        <ul class="list" v-if="datalist.length != 0">
             <li v-for="data in datalist" :key="data.filmId" class="item">
                 <img :src="data.poster" alt="">
                 <div class="main">
@@ -22,6 +22,7 @@
                 </div>
             </li>
         </ul>
+        <p class="zero" v-else>购物车空空如也！</p>
         <bottombar @click.native="toPay">
             <div>总计：{{addNum}}</div>
         </bottombar>
@@ -36,7 +37,7 @@ export default {
         return {
             datalist:[],
             start:1,
-            price:20,
+            price:0,
             current:1
         }
     },
@@ -57,11 +58,23 @@ export default {
             this.current++
         },
         oddOne(){
-            if(this.current < 1){
-                this.current = 0
+            if(this.current === 1){
+                MessageBox({
+                    title: '提示',
+                    message: '确认删除该订单？',
+                    showCancelButton: true
+                }).then(res => {
+                    this.isDelete(res)
+                })
             }else{
                 this.current--
-            }   
+            }
+        },
+        isDelete(data){
+            if(data === 'confirm'){
+                this.datalist = []
+                this.$store.commit("removeShop")
+            }
         },
         toPay(){
             MessageBox({
@@ -74,6 +87,9 @@ export default {
     mounted () {
         this.$store.commit('changeTab',false)
         this.datalist = this.$store.state.shopcar
+        if(this.datalist.length > 0){
+            this.price = 20
+        }
     },
     beforeDestroy () {
         this.$store.commit('changeTab',true)
@@ -85,13 +101,21 @@ export default {
     font-size: 20px;
 }
 .shop{
+    .zero{
+       margin-top: 44px; 
+       text-align: center;
+       line-height: 100px;
+       font-size: 24px;
+       font-weight: bold;
+    }
     .list{
         margin-top: 44px;
         box-sizing: border-box;
-        padding: 20px;
         .item{
             display: flex;
-            margin: 20px 0;
+            box-sizing: border-box;
+            padding: 20px 10px;
+            border: 1px solid lightgray;
             justify-content: space-between;
             img{
                 height: 100px;

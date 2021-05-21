@@ -62,6 +62,10 @@ export default new Vuex.Store({
     //添加购物车信息
     addShop(state,data){
       state.shopcar.push(JSON.parse(JSON.stringify(data)))
+    },
+    //移除购物车信息
+    removeShop(state){
+      state.shopcar = []
     }
   }
 })
