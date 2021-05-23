@@ -9,16 +9,16 @@
             </template>
         </Topbar> 
         <ul class="list" v-if="datalist.length != 0">
-            <li v-for="data in datalist" :key="data.filmId" class="item">
+            <li v-for="(data,index) in datalist" :key="data.filmId" class="item">
                 <img :src="data.poster" alt="">
                 <div class="main">
                     <h2>{{data.name}}</h2>
                     <p>单价：{{price}}</p>
                 </div>
                 <div class="num">
-                    <button @click="addOne">+</button>
-                    <span>{{current}}</span>
-                    <button @click="oddOne">-</button>
+                    <button @click="addOne(index)">+</button>
+                    <span>{{data.current}}</span>
+                    <button @click="oddOne(index)">-</button>
                 </div>
             </li>
         </ul>
@@ -43,7 +43,11 @@ export default {
     },
     computed: {
       addNum(){
-          return this.price * this.current
+          let all = 0
+          for(let i = 0;i < this.datalist.length;i++){
+              all += this.datalist[i].current * this.price
+          }
+          return this.datalist.length !== 0 ? all : 0
       }  
     },
     components: {
@@ -54,26 +58,26 @@ export default {
         backpage(){
             this.$router.push("/user")
         },
-        addOne(){
-            this.current++
+        addOne(i){
+            this.datalist[i].current++
         },
-        oddOne(){
-            if(this.current === 1){
+        oddOne(i){
+            if(this.datalist[i].current === 1){
                 MessageBox({
                     title: '提示',
                     message: '确认删除该订单？',
                     showCancelButton: true
                 }).then(res => {
-                    this.isDelete(res)
+                    this.isDelete(res,i)
                 })
             }else{
-                this.current--
+                this.datalist[i].current--
             }
         },
-        isDelete(data){
+        isDelete(data,i){
             if(data === 'confirm'){
-                this.datalist = []
-                this.$store.commit("removeShop")
+                this.datalist.splice(i,1)
+                this.$store.commit("removeShop",i)
             }
         },
         toPay(){
@@ -86,7 +90,10 @@ export default {
     },
     mounted () {
         this.$store.commit('changeTab',false)
-        this.datalist = this.$store.state.shopcar
+        this.datalist = this.$store.state.shopcar.map(item => {
+            this.$set(item, "current", 1)
+            return item
+        })
         if(this.datalist.length > 0){
             this.price = 20
         }
